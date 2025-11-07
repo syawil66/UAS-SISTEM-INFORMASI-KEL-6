@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use App\Models\TahunPelajaran;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer('layouts.admin', function ($view) {
+            $tahunAktif = TahunPelajaran::where('status', 'Aktif')->first();
+
+        // Bagikan data $tahunAktif ke semua view 'layouts.admin'
+            $view->with('tahunAktif', $tahunAktif);
+        });
     }
 }

@@ -36,8 +36,8 @@
                     <span>Profil Sekolah </span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+            <li class="nav-item {{ request()->routeIs('tahunPelajaran') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('tahunPelajaran') }}">
                     <i class="fas fa-fw fa-calendar-alt"></i>
                     <span>Tahun Pelajaran </span></a>
             </li>
@@ -48,10 +48,10 @@
                     <span>Data Akademik [cite: 17, 31, 32]</span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+            <li class="nav-item {{ request()->routeIs('guru.index') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('guru.index') }}">
                     <i class="fas fa-fw fa-chalkboard-teacher"></i>
-                    <span>Data Guru [cite: 20, 33]</span></a>
+                    <span>Data Guru</span></a>
             </li>
 
             <li class="nav-item">
@@ -75,7 +75,13 @@
                     </button>
 
                     <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100">
-                        <h5 class="mb-0 text-gray-800">Tahun Pelajaran 2025/2026 [cite: 2, 24]</h5>
+                        <h5 class="mb-0 text-gray-800">
+                            @if($tahunAktif)
+                            Tahun Pelajaran {{ $tahunAktif->tahun_pelajaran }} ({{ $tahunAktif->semester }})
+                            @else
+                            Tidak ada Tahun Pelajaran Aktif
+                            @endif
+                        </h5>
                     </div>
 
                     <ul class="navbar-nav ml-auto">
@@ -132,9 +138,8 @@
 
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+    @stack('scripts')
 </body>
 </html>
