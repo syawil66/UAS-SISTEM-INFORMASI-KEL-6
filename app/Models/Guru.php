@@ -26,4 +26,10 @@ class Guru extends Model
         'golongan',
         'alamat_lengkap',
     ];
+    
+ public function mataPelajaran()
+    {
+        return $this->hasMany(MataPelajaran::class, 'guru_id');
+    }
+    
 }

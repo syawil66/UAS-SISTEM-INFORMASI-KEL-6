@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfilSekolahController;
 use App\Http\Controllers\TahunPelajaranController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\MataPelajaranController;
+
 
 //Route Dashboard
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -26,3 +28,12 @@ Route::get('/data-guru/{guru}', [GuruController::class, 'show'])->name('guru.sho
 Route::get('/data-guru/{guru}/edit', [GuruController::class, 'edit'])->name('guru.edit');
 Route::put('/data-guru/{guru}', [GuruController::class, 'update'])->name('guru.update');
 Route::delete('/data-guru/{guru}', [GuruController::class, 'destroy'])->name('guru.destroy');
+
+//Route Mata Pelajaran
+
+Route::get('/matapelajaran', [MataPelajaranController::class, 'index'])->name('matapelajaran.index');
+Route::get('/matapelajaran/create', [MataPelajaranController::class, 'create'])->name('matapelajaran.create');
+Route::post('/matapelajaran', [MataPelajaranController::class, 'store'])->name('matapelajaran.store');
+Route::get('/matapelajaran/{id}/edit', [MataPelajaranController::class, 'edit'])->name('matapelajaran.edit');
+Route::put('/matapelajaran/{id}', [MataPelajaranController::class, 'update'])->name('matapelajaran.update');
+Route::delete('/matapelajaran/{id}', [MataPelajaranController::class, 'destroy'])->name('matapelajaran.destroy');
