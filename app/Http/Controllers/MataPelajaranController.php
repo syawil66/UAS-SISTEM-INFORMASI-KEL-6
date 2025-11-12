@@ -28,7 +28,7 @@ class MataPelajaranController extends Controller
             'kelompok' => 'required',
             'kelas_tingkat' => 'required',
             'semester' => 'required',
-            'guru_pengampu' => 'required',
+            'guru_id' => 'required',
         ]);
 
         MataPelajaran::create($request->all());
@@ -48,7 +48,7 @@ class MataPelajaranController extends Controller
             'kelompok' => 'required',
             'kelas_tingkat' => 'required',
             'semester' => 'required',
-            'guru_pengampu' => 'required',
+            'guru_id' => 'required',
         ]);
 
         $mataPelajaran->update($request->all());

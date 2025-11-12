@@ -45,7 +45,7 @@
             <li class="nav-item {{ request()->routeIs('matapelajaran.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('matapelajaran.index') }}">
                     <i class="fas fa-fw fa-book"></i>
-                    <span>Data Akademik [cite: 17, 31, 32]</span></a>
+                    <span>Data Akademik</span></a>
             </li>
 
             <li class="nav-item {{ request()->routeIs('guru.index') ? 'active' : '' }}">

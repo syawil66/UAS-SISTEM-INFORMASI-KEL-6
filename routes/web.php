@@ -29,9 +29,9 @@ Route::get('/data-guru/{guru}/edit', [GuruController::class, 'edit'])->name('gur
 Route::put('/data-guru/{guru}', [GuruController::class, 'update'])->name('guru.update');
 Route::delete('/data-guru/{guru}', [GuruController::class, 'destroy'])->name('guru.destroy');
 
-//Route Mata Pelajaran
 
-Route::get('/matapelajaran', [MataPelajaranController::class, 'index'])->name('matapelajaran.index');
+//Route Mata Pelajaran
+Route::get('matapelajaran', [MataPelajaranController::class, 'index'])->name('matapelajaran.index');
 Route::get('/matapelajaran/create', [MataPelajaranController::class, 'create'])->name('matapelajaran.create');
 Route::post('/matapelajaran', [MataPelajaranController::class, 'store'])->name('matapelajaran.store');
 Route::get('/matapelajaran/{id}/edit', [MataPelajaranController::class, 'edit'])->name('matapelajaran.edit');
