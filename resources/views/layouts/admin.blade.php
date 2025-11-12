@@ -42,8 +42,8 @@
                     <span>Tahun Pelajaran </span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+            <li class="nav-item {{ request()->routeIs('matapelajaran.*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('matapelajaran.index') }}">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Data Akademik [cite: 17, 31, 32]</span></a>
             </li>
