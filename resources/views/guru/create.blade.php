@@ -27,7 +27,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Nama Lengkap Guru <span class="text-danger">*</span></label>
-                        <input type="text" name="nama_guru" class="form-control" value="{{ old('nama_guru') }}" required>
+                        <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
                     </div>
 
                     <div class="form-group">
@@ -42,6 +42,13 @@
                         <input type="email" name="email" class="form-control" value="{{ old('email') }}" required
                             data-toggle="tooltip" data-placement="top" title="Harus unik dan format email valid.">
                         @error('email') <div class="text-danger small">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password Login <span class="text-danger">*</span></label>
+                        <input type="password" name="password" class="form-control" required
+                            data-toggle="tooltip" data-placement="top" title="Password default untuk guru.">
+                        @error('password') <div class="text-danger small">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="form-group">
@@ -88,11 +95,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Status Aktif <span class="text-danger">*</span></label>
+                        <label>Status Aktif (untuk Login) <span class="text-danger">*</span></label>
                         <select name="status_aktif" class="form-control" required>
-                            @foreach($dropdownData['status_aktif'] as $status)
-                                <option value="{{ $status }}" {{ old('status_aktif') == $status ? 'selected' : '' }}>{{ $status }}</option>
-                            @endforeach
+                            <option value="Aktif" {{ old('status_aktif') == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                            <option value="Tidak Aktif" {{ old('status_aktif') == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
                         </select>
                     </div>
 

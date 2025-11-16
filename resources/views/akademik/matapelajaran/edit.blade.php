@@ -21,7 +21,7 @@
             </div>
         @endif
 
-        <form action="{{ route('matapelajaran.update', $mataPelajaran->id) }}" method="POST">
+        <form action="{{ route('akademik.matapelajaran.update', $mataPelajaran->id) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -81,7 +81,7 @@
 
             <hr>
             <div class="text-right">
-                <a href="{{ route('matapelajaran.index') }}" class="btn btn-secondary">Batal</a>
+                <a href="{{ route('akademik.matapelajaran.index') }}" class="btn btn-secondary">Batal</a>
                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
             </div>
         </form>

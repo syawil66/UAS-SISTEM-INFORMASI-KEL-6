@@ -2,7 +2,7 @@
 
 @section('title', 'Detail Guru - SIAKAD SMA')
 @section('page-title')
-    Detail Data Guru: {{ $guru->nama_guru }}
+    Detail Data Guru: {{ $guru->user->name }}
 @endsection
 
 @section('content')
@@ -18,8 +18,8 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-4 text-center">
-                <img src="{{ $guru->foto ? asset('storage/'.$guru->foto) : asset('img/undraw_profile.svg') }}"
-                    alt="Foto {{ $guru->nama_guru }}"
+                <img src="{{ $guru->user->foto ? asset('storage/'.$guru->user->foto) : asset('img/undraw_profile.svg') }}"
+                    alt="Foto {{ $guru->user->name }}"
                     class="img-thumbnail"
                     style="width: 100%; max-width: 250px; object-fit: cover;">
             </div>
@@ -29,7 +29,7 @@
                     <tbody>
                         <tr>
                             <td style="width: 30%;"><strong>Nama Lengkap</strong></td>
-                            <td>{{ $guru->nama_guru }}</td>
+                            <td>{{ $guru->user->name }}</td>
                         </tr>
                         <tr>
                             <td><strong>NIP</strong></td>
@@ -37,7 +37,7 @@
                         </tr>
                         <tr>
                             <td><strong>Email</strong></td>
-                            <td>{{ $guru->email }}</td>
+                            <td>{{ $guru->user->email }}</td>
                         </tr>
                         <tr>
                             <td><strong>No. Handphone</strong></td>
@@ -58,10 +58,10 @@
                         <tr>
                             <td><strong>Status Aktif</strong></td>
                             <td>
-                                @if($guru->status_aktif == 'Aktif')
-                                    <span class="badge badge-success">{{ $guru->status_aktif }}</span>
+                                @if($guru->user->status_aktif == 'Aktif')
+                                    <span class="badge badge-success">{{ $guru->user->status_aktif }}</span>
                                 @else
-                                    <span class="badge badge-danger">{{ $guru->status_aktif }}</span>
+                                    <span class="badge badge-danger">{{ $guru->user->status_aktif }}</span>
                                 @endif
                             </td>
                         </tr>

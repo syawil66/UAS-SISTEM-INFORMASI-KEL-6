@@ -43,18 +43,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
+        @endif
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-        @endif
 
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                
+
 
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -74,12 +73,12 @@
                     @forelse($gurus as $guru)
                     <tr>
                         <td>
-                            <img src="{{ $guru->foto ? asset('storage/'.$guru->foto) : asset('img/undraw_profile.svg') }}"
+                            <img src="{{ $guru->user->foto ? asset('storage/'.$guru->user->foto) : asset('img/undraw_profile.svg') }}"
                                 alt="Foto" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
                         </td>
-                        <td>{{ $guru->nama_guru }}</td>
+                        <td>{{ $guru->user->name }}</td>
                         <td>{{ $guru->nip }}</td>
-                        <td>{{ $guru->email }}</td>
+                        <td>{{ $guru->user->email }}</td>
                         <td>{{ $guru->status_kepegawaian }}</td>
                         <td>
                             @if($guru->is_wali_kelas)

@@ -10,12 +10,12 @@ class KelasController extends Controller
     public function index()
     {
         $kelas = Kelas::all();
-        return view('kelas.index', compact('kelas'));
+        return view('akademik.kelas.index', compact('kelas'));
     }
 
     public function create()
     {
-        return view('kelas.create');
+        return view('akademik.kelas.create');
     }
 
     public function store(Request $request)
@@ -28,13 +28,13 @@ class KelasController extends Controller
         ]);
 
         Kelas::create($request->all());
-        return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil ditambahkan');
+        return redirect()->route('akademik.kelas.index')->with('success', 'Data kelas berhasil ditambahkan');
     }
 
     public function edit($id)
     {
         $kelas = Kelas::findOrFail($id);
-        return view('kelas.edit', compact('kelas'));
+        return view('akademik.kelas.edit', compact('kelas'));
     }
 
     public function update(Request $request, $id)
@@ -49,7 +49,7 @@ class KelasController extends Controller
         $kelas = Kelas::findOrFail($id);
         $kelas->update($request->all());
 
-        return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil diperbarui');
+        return redirect()->route('akademik.kelas.index')->with('success', 'Data kelas berhasil diperbarui');
     }
 
     public function destroy($id)
@@ -57,6 +57,6 @@ class KelasController extends Controller
         $kelas = Kelas::findOrFail($id);
         $kelas->delete();
 
-        return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil dihapus');
+        return redirect()->route('akademik.kelas.index')->with('success', 'Data kelas berhasil dihapus');
     }
 }

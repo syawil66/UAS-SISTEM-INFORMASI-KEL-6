@@ -4,23 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // $jumlahSiswa = Siswa::count();
-        // $jumlahGuru = Guru::count();
+        $user = Auth::user();
 
-        $dataAdmin = [
-            'guruAktif' => 20,
-            'siswaAktif' => 100,
-            'kelas' => 5,
-            'ta' => 'Ganjil 2025/2026'
-        ];
+        $dataAdmin = [];
+        $dataGuru = [];
 
-        $dataSiswa = [];
+        // 4. Cek Peran (Role)
+        if ($user->role == 'admin') {
 
-        return view('dashboard', compact('dataAdmin', 'dataSiswa'));
+            $dataAdmin = [
+                'guruAktif' => 20, // Nanti: \App\Models\Guru::where('status_aktif', 'Aktif')->count(),
+                'siswaAktif' => 100, // Nanti: \App\Models\Siswa::count(),
+                'kelas' => 5, // Nanti: \App\Models\Kelas::count(),
+                'ta' => 'Ganjil 2025/2026' // Nanti: \App\Models\TahunPelajaran::where('status','Aktif')->first()->nama
+            ];
+
+        } elseif ($user->role == 'guru') {
+
+            $dataGuru = [
+                'jamMengajar' => '1 Jam',
+                'kelasMengajar' => '1 Kelas',
+                'mapelUtama' => 'Matematika',
+                'semester' => 'Ganjil'
+            ];
+        }
+
+        return view('dashboard', compact('dataAdmin', 'dataGuru'));
     }
 }

@@ -10,7 +10,7 @@
     </div>
 
     <div class="card-body">
-        <form action="{{ route('kelas.store') }}" method="POST">
+        <form action="{{ route('akademik.kelas.store') }}" method="POST">
             @csrf
 
             <div class="form-group">
@@ -54,7 +54,7 @@
             </div>
 
             <div class="text-right mt-4">
-                <a href="{{ route('kelas.index') }}" class="btn btn-secondary">
+                <a href="{{ route('akademik.kelas.index') }}" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i> Kembali
                 </a>
                 <button type="submit" class="btn btn-primary">

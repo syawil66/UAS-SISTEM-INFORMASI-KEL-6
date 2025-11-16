@@ -20,7 +20,7 @@
             </div>
         @endif
 
-        <form action="{{ route('kelas.update', $kelas->id) }}" method="POST">
+        <form action="{{ route('akademik.kelas.update', $kelas->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="row">
@@ -51,7 +51,7 @@
 
             <hr>
             <div class="text-right">
-                <a href="{{ route('kelas.index') }}" class="btn btn-secondary">Batal</a>
+                <a href="{{ route('akademik.kelas.index') }}" class="btn btn-secondary">Batal</a>
                 <button type="submit" class="btn btn-success">Update Data</button>
             </div>
         </form>

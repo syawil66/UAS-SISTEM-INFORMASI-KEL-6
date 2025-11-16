@@ -19,7 +19,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
-                <div class="sidebar-brand-text mx-3">SIAKAD [cite: 1, 23]</div>
+                <div class="sidebar-brand-text mx-3">SIAKAD</div>
             </a>
 
             <hr class="sidebar-divider my-0">
@@ -27,14 +27,16 @@
             <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard [cite: 5, 27]</span></a>
+                    <span>Dashboard</span></a>
             </li>
 
-            <li class="nav-item {{ request()->routeIs('profilSekolah') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('profilSekolah') }}">
+            <li class="nav-item {{ request()->routeIs('profilSekolah.index') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('profilSekolah.index') }}">
                     <i class="fas fa-fw fa-school"></i>
                     <span>Profil Sekolah </span></a>
             </li>
+
+            @if (Auth::user()->role === 'admin')
 
             <li class="nav-item {{ request()->routeIs('tahunPelajaran') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('tahunPelajaran') }}">
@@ -42,8 +44,8 @@
                     <span>Tahun Pelajaran </span></a>
             </li>
 
-            <li class="nav-item {{ request()->routeIs('matapelajaran.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('matapelajaran.index') }}">
+            <li class="nav-item {{ request()->routeIs('akademik.matapelajaran.*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('akademik.matapelajaran.index') }}">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Data Akademik</span></a>
             </li>
@@ -59,6 +61,24 @@
                     <i class="fas fa-fw fa-user-graduate"></i>
                     <span>Data Siswa [cite: 21, 34]</span></a>
             </li>
+
+            @elseif (Auth::user()->role === 'guru')
+
+            <li class="nav-item"><a class="nav-link" href="#"></a>
+                <i class="fas fa-fw fa-user-graduate"></i>
+                <span>Data Siswa</span>
+            </li>
+
+            <li class="nav-item"><a class="nav-link" href="#"></a>
+                <i class="fas fa-fw fa-edit"></i>
+                <span>Input Nilai</span>
+            </li>
+
+            <li class="nav-item"><a class="nav-link" href="#"></a>
+                <i class="fas fa-fw fa-calendar-week"></i>
+                <span>Jadwal Pelajaran</span>
+            </li>
+            @endif
 
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -91,13 +111,15 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin [cite: 3, 25]</span>
                                 <img class="img-profile rounded-circle" src="{{ asset('img/undraw_profile.svg') }}">
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu ..." aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
+                                    <i class="fas fa-user ..."></i>
+                                    Profile
                                 </a>
-                                <div class="dropdown-divider"></div>
+                            <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
                                 </a>
                             </div>
                         </li>
@@ -130,7 +152,13 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="#">Logout</a>
+                    <a class="btn btn-primary" href="#"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                 </div>
             </div>
         </div>
@@ -143,3 +171,4 @@
     @stack('scripts')
 </body>
 </html>
+

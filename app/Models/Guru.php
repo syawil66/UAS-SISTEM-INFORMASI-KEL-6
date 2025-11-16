@@ -12,24 +12,26 @@ class Guru extends Model
     protected $table = 'gurus';
 
     protected $fillable = [
-        'foto',
-        'nama_guru',
+        'user_id',
         'nip',
         'bidang_ajar',
         'status_kepegawaian',
         'is_wali_kelas',
-        'email',
         'no_hp',
-        'status_aktif',
         'npwp',
         'no_rekening',
         'golongan',
         'alamat_lengkap',
     ];
-    
- public function mataPelajaran()
+
+public function mataPelajaran()
     {
         return $this->hasMany(MataPelajaran::class, 'guru_id');
     }
-    
+
+public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

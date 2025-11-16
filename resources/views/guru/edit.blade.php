@@ -26,7 +26,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Nama Lengkap Guru <span class="text-danger">*</span></label>
-                        <input type="text" name="nama_guru" class="form-control" value="{{ old('nama_guru', $guru->nama_guru) }}" required>
+                        <input type="text" name="name" class="form-control" value="{{ old('name', $guru->user->name) }}" required>
                     </div>
 
                     <div class="form-group">
@@ -38,9 +38,16 @@
 
                     <div class="form-group">
                         <label>Email <span class="text-danger">*</span></label>
-                        <input type="email" name="email" class="form-control" value="{{ old('email', $guru->email) }}" required
+                        <input type="email" name="email" class="form-control" value="{{ old('email', $guru->user->email) }}" required
                             data-toggle="tooltip" data-placement="top" title="Harus unik dan format email valid.">
                         @error('email') <div class="text-danger small">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ganti Password (Opsional)</label>
+                        <input type="password" name="password" class="form-control"
+                            data-toggle="tooltip" data-placement="top" title="Kosongkan jika tidak ingin ganti password.">
+                        @error('password') <div class="text-danger small">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="form-group">
@@ -86,11 +93,10 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label>Status Aktif <span class="text-danger">*</span></label>
+                    <label>Status Aktif <span class="text-danger">*</span></label>
                         <select name="status_aktif" class="form-control" required>
                             @foreach($dropdownData['status_aktif'] as $status)
-                                <option value="{{ $status }}" {{ old('status_aktif', $guru->status_aktif) == $status ? 'selected' : '' }}>{{ $status }}</option>
+                                <option value="{{ $status }}" {{ old('status_aktif', $guru->user->status_aktif) == $status ? 'selected' : '' }}>{{ $status }}</option>
                             @endforeach
                         </select>
                     </div>

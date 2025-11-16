@@ -8,10 +8,10 @@
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h6 class="m-0 font-weight-bold text-primary">Data Akademik - Daftar Kelas</h6>
         <div>
-            <a href="{{ route('matapelajaran.index') }}" class="btn btn-warning btn-sm mr-2">
+            <a href="{{ route('akademik.matapelajaran.index') }}" class="btn btn-warning btn-sm mr-2">
                 <i class="fas fa-arrow-left"></i> Kembali ke Mata Pelajaran
             </a>
-            <a href="{{ route('kelas.create') }}" class="btn btn-primary btn-sm">
+            <a href="{{ route('akademik.kelas.create') }}" class="btn btn-primary btn-sm">
                 <i class="fas fa-plus"></i> Tambah Kelas
             </a>
         </div>
@@ -44,7 +44,7 @@
                                 <a href="{{ route('kelas.edit', $item->id) }}" class="btn btn-success btn-sm">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
-                                <form action="{{ route('kelas.destroy', $item->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('akademik.kelas.destroy', $item->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"
