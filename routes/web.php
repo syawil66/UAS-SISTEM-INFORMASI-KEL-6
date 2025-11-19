@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfilSekolahController;
 use App\Http\Controllers\TahunPelajaranController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\Guru\DashboardController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\KelasController;
 
