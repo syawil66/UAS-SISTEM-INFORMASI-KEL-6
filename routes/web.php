@@ -70,4 +70,7 @@ Route::delete('/data-guru/{guru}', [GuruController::class, 'destroy'])->name('gu
 //Rute untuk Guru
 Route::middleware(['auth', 'role:guru'])->group(function () {
     // Tambahkan rute khusus untuk guru di sini
+Route::get('/guru/dashboard', [GuruDashboardController::class, 'index'])
+    ->middleware(['auth', 'role:guru']);
+
 });
