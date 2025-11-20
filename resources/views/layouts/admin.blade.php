@@ -57,9 +57,9 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('siswa.index')}}">
                     <i class="fas fa-fw fa-user-graduate"></i>
-                    <span>Data Siswa [cite: 21, 34]</span></a>
+                    <span>Data Siswa</span></a>
             </li>
 
             @elseif (Auth::user()->role === 'guru')

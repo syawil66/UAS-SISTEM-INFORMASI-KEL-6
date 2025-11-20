@@ -8,6 +8,7 @@ use App\Http\Controllers\TahunPelajaranController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\SiswaController;
 
 //Rute untuk yang belum login (tamu)
 Route::get('/login', [LoginController::class, 'create'])->name('login');
@@ -25,6 +26,7 @@ Route::get('/profil-sekolah', [ProfilSekolahController::class, 'index'])->name('
 
 //Rute Untuk Admin
 Route::middleware('role:admin')->group(function () {
+
 
 //Route Profil Sekolah
 Route::get('/profil-sekolah/edit', [ProfilSekolahController::class, 'edit'])->name('profilSekolah.edit');
@@ -65,9 +67,12 @@ Route::put('/data-guru/{guru}', [GuruController::class, 'update'])->name('guru.u
 Route::delete('/data-guru/{guru}', [GuruController::class, 'destroy'])->name('guru.destroy');
 });
 
+Route::resource('siswa', SiswaController::class);
 });
 
 //Rute untuk Guru
 Route::middleware(['auth', 'role:guru'])->group(function () {
     // Tambahkan rute khusus untuk guru di sini
+
+
 });
