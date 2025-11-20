@@ -6,7 +6,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfilSekolahController;
 use App\Http\Controllers\TahunPelajaranController;
 use App\Http\Controllers\GuruController;
-use App\Http\Controllers\Guru\DashboardController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\KelasController;
 
@@ -71,7 +70,5 @@ Route::delete('/data-guru/{guru}', [GuruController::class, 'destroy'])->name('gu
 //Rute untuk Guru
 Route::middleware(['auth', 'role:guru'])->group(function () {
     // Tambahkan rute khusus untuk guru di sini
-Route::get('/guru/dashboard', [GuruDashboardController::class, 'index'])
-    ->middleware(['auth', 'role:guru']);
 
 });
