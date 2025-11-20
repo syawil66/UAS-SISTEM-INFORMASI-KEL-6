@@ -2,71 +2,61 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Siswa;
 use Illuminate\Http\Request;
+use App\Models\ProfilSekolah;
+use Illuminate\Support\Facades\Auth;
 
-class SiswaController extends Controller
+class ProfilSekolahController extends Controller
 {
+    /**
+     * Tampilkan halaman 'Lihat Profil' (untuk semua role).
+     */
     public function index()
     {
-        $siswas = Siswa::all();
-        return view('siswa.index', compact('siswas'));
+        // Ambil data baris pertama dari tabel profil_sekolah
+        // firstOrNew() penting agar tidak error jika tabel masih kosong
+        $profil = ProfilSekolah::firstOrNew([]);
+
+        return view('profilSekolah.index', compact('profil'));
     }
 
-    public function create()
+    /**
+     * Tampilkan halaman 'Form Edit Profil'.
+     */
+    public function edit()
     {
-        return view('siswa.create');
+        // Cek lagi (walau sudah ada middleware)
+        if (Auth::user()->role != 'admin') {
+            abort(403);
+        }
+
+        $profil = ProfilSekolah::firstOrNew([]);
+        return view('profilSekolah.edit', compact('profil'));
     }
 
-    public function store(Request $request)
+    /**
+     * Simpan perubahan dari form edit.
+     */
+    public function update(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'nis' => 'required|unique:siswas',
-            'nisn' => 'required|unique:siswas',
-            'kelas' => 'required',
-            'jurusan' => 'required',
-            'jk' => 'required',
-            'email' => 'required|email|unique:siswas',
-            'no_hp' => 'required',
-            'status' => 'required',
+        if (Auth::user()->role != 'admin') {
+            abort(403);
+        }
+
+        // Validasi data
+        $validatedData = $request->validate([
+            'nama_sekolah' => 'required|string|max:255',
+            'jenjang' => 'nullable|string|max:50',
+            'alamat' => 'nullable|string',
+            'email' => 'nullable|email|max:255',
+            'nama_kepala_sekolah' => 'nullable|string|max:255',
         ]);
 
-        Siswa::create($request->all());
-        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil ditambahkan.');
-    }
+        ProfilSekolah::updateOrCreate(
+            ['id' => 1],
+            $validatedData
+        );
 
-    public function show(Siswa $siswa)
-    {
-        return view('siswa.show', compact('siswa'));
-    }
-
-    public function edit(Siswa $siswa)
-    {
-        return view('siswa.edit', compact('siswa'));
-    }
-
-    public function update(Request $request, Siswa $siswa)
-    {
-        $request->validate([
-            'nama' => 'required',
-            'nis' => 'required|unique:siswas,nis,' . $siswa->id,
-            'nisn' => 'required|unique:siswas,nisn,' . $siswa->id,
-            'kelas' => 'required',
-            'jurusan' => 'required',
-            'jk' => 'required',
-            'email' => 'required|email|unique:siswas,email,' . $siswa->id,
-            'no_hp' => 'required',
-            'status' => 'required',
-        ]);
-
-        $siswa->update($request->all());
-        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil diperbarui.');
-    }
-
-    public function destroy(Siswa $siswa)
-    {
-        $siswa->delete();
-        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil dihapus.');
+        return redirect()->route('profilSekolah.index')->with('success', 'Profil sekolah berhasil diperbarui.');
     }
 }

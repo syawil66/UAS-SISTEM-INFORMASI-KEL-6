@@ -74,5 +74,4 @@ Route::resource('siswa', SiswaController::class);
 Route::middleware(['auth', 'role:guru'])->group(function () {
     // Tambahkan rute khusus untuk guru di sini
 
-
 });
