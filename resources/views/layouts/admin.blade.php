@@ -64,17 +64,17 @@
 
             @elseif (Auth::user()->role === 'guru')
 
-            <li class="nav-item"><a class="nav-link" href="#"></a>
+            <li class="nav-item"><a class="nav-link" href="{{ route('guru.siswa.index') }}">
                 <i class="fas fa-fw fa-user-graduate"></i>
                 <span>Data Siswa</span>
             </li>
 
-            <li class="nav-item"><a class="nav-link" href="#"></a>
+            <li class="nav-item"><a class="nav-link" href="{{ route('guru.nilai.index') }}">
                 <i class="fas fa-fw fa-edit"></i>
                 <span>Input Nilai</span>
             </li>
 
-            <li class="nav-item"><a class="nav-link" href="#"></a>
+            <li class="nav-item"><a class="nav-link" href="{{ route ('guru.jadwal.index')}}">
                 <i class="fas fa-fw fa-calendar-week"></i>
                 <span>Jadwal Pelajaran</span>
             </li>

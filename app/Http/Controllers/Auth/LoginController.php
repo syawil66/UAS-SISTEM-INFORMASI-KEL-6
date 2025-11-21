@@ -3,63 +3,38 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
-    /**
-     * Menampilkan halaman form login.
-     */
-    public function create()
-    {
-        return view('auth.login');
-    }
+    /*
+    |--------------------------------------------------------------------------
+    | Login Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles authenticating users for the application and
+    | redirecting them to your home screen. The controller uses a trait
+    | to conveniently provide its functionality to your applications.
+    |
+    */
+
+    use AuthenticatesUsers;
 
     /**
-     * Menangani proses autentikasi (login).
+     * Where to redirect users after login.
+     *
+     * @var string
      */
-    public function store(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-
-        if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            // Jika berhasil...
-            $request->session()->regenerate();
-            $user = Auth::user();
-
-            // 4. Arahkan berdasarkan peran (role)
-            if ($user->role == 'admin') {
-                return redirect()->route('dashboard');
-            }
-
-            if ($user->role == 'guru') {
-                return redirect()->route('dashboard');
-            }
-
-            return redirect('/');
-        }
-
-        // Jika gagal...
-        return back()->withErrors([
-            'email' => 'Email atau password yang Anda masukkan salah.',
-        ])->onlyInput('email');
-    }
+    protected $redirectTo = '/home';
 
     /**
-     * Menangani proses logout.
+     * Create a new controller instance.
+     *
+     * @return void
      */
-    public function logout(Request $request)
+    public function __construct()
     {
-        Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/login');
+        $this->middleware('guest')->except('logout');
+        $this->middleware('auth')->only('logout');
     }
 }

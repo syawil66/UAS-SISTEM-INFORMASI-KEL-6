@@ -92,15 +92,17 @@
 
         <div class="row">
             <div class="col-lg-6 mb-4">
-                <a href="#" class="btn btn-primary btn-icon-split btn-lg w-100">
-                    <span class="icon text-white-50"><i class="fas fa-calendar-alt"></i></span>
-                    <span class="text">Lihat Jadwal Pelajaran</span>
-                </a>
-            </div>
+    <div class="btn btn-info btn-icon-split btn-lg w-100" style="cursor: pointer;">
+        <span class="icon text-white-50"><i class="fas fa-calendar-alt"></i></span>
+        <span class="text">Lihat Jadwal Pelajaran</span>
+    </div>
+</div>
+
             <div class="col-lg-6 mb-4">
-                <a href="#" class="btn btn-info btn-icon-split btn-lg w-100">
-                    <span class="icon text-white-50"><i class="fas fa-file-alt"></i></span>
-                    <span class="text">Rekap Nilai</span>
+    <a href="{{ route('rekap.nilai') }}" class="btn btn-info btn-icon-split btn-lg w-100">
+        <span class="icon text-white-50"><i class="fas fa-file-alt"></i></span>
+        <span class="text">Rekap Nilai ({{ $dataAdmin['totalNilai'] ?? 0 }})</span>
+
                 </a>
             </div>
         </div>

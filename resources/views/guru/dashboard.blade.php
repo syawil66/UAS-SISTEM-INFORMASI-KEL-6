@@ -72,10 +72,19 @@
             <h5 class="mb-0">Menu Cepat</h5>
         </div>
         <div class="card-body">
-            <a href="{{ route('guru.index') }}" class="btn btn-outline-primary me-2 mb-2">Kelola Guru</a>
-            <a href="{{ route('kelas.index') }}" class="btn btn-outline-success me-2 mb-2">Kelola Kelas</a>
-            <a href="{{ route('mapel.index') }}" class="btn btn-outline-info mb-2">Kelola Mapel</a>
-        </div>
+    <a href="{{ route('guru.siswa.index') }}" class="btn btn-outline-primary me-2 mb-2">
+        Data Siswa
+    </a>
+
+    <a href="{{ route('guru.nilai.index') }}" class="btn btn-outline-success me-2 mb-2">
+        Input Nilai
+    </a>
+
+    <a href="#" class="btn btn-outline-info mb-2 disabled">
+        Rekap Nilai (Hanya Admin)
+    </a>
+</div>
+
     </div>
 
 </div>
