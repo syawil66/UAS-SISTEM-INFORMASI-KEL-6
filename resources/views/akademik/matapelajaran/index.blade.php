@@ -74,7 +74,7 @@
                         <td>{{ $mapel->kelompok }}</td>
                         <td>{{ $mapel->kelas_tingkat }}</td>
                         <td>{{ $mapel->semester }}</td>
-                        <td>{{ $mapel->guru_pengampu }}</td>
+                        <td>{{ $mapel->guru->user->name ?? 'Data Guru Error' }}</td>
                         <td>
                             <a href="{{ route('akademik.matapelajaran.edit', $mapel->id) }}" class="btn btn-warning btn-sm">
                                 <i class="fas fa-edit"></i> Edit

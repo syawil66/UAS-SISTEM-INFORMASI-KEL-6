@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -16,25 +17,29 @@ class SiswaController extends Controller
 
     public function create()
     {
-        return view('siswa.create');
+        $dataKelas = \App\Models\Kelas::all();
+        $siswa = new \App\Models\Siswa();
+        return view('siswa.create', compact('dataKelas'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'nama' => 'required',
-            'nis' => 'required|unique:siswas',
-            'nisn' => 'required|unique:siswas',
-            'kelas' => 'required',
+            'nis' => 'required|unique:siswas,nis',
+            'nisn' => 'required|unique:siswas,nisn',
+            'kelas_id' => 'required|exists:kelas,id',
             'jurusan' => 'required',
             'jk' => 'required',
-            'email' => 'required|email|unique:siswas',
+            'email' => 'required|email|unique:siswas,email',
             'no_hp' => 'required',
             'status' => 'required',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
-        // Upload foto
+        $infoKelas = \App\Models\Kelas::find($request->kelas_id);
+        $validated['kelas'] = $infoKelas->nama_kelas;
+
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $namaFoto = time() . '.' . $file->getClientOriginalExtension();
@@ -42,7 +47,7 @@ class SiswaController extends Controller
             $validated['foto'] = $namaFoto;
         }
 
-        Siswa::create($validated);
+        \App\Models\Siswa::create($validated);
 
         return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil ditambahkan');
     }
@@ -55,8 +60,10 @@ class SiswaController extends Controller
 
     public function edit($id)
     {
-        $siswa = Siswa::findOrFail($id);
-        return view('siswa.edit', compact('siswa'));
+        $siswa = \App\Models\Siswa::findOrFail($id);
+        $dataKelas = \App\Models\Kelas::all();
+
+        return view('siswa.edit', compact('siswa', 'dataKelas'));
     }
 
     public function update(Request $request, $id)
@@ -67,7 +74,7 @@ class SiswaController extends Controller
             'nama' => 'required',
             'nis' => 'required|unique:siswas,nis,' . $id,
             'nisn' => 'required|unique:siswas,nisn,' . $id,
-            'kelas' => 'required',
+            'kelas_id' => 'required|exists:kelas,id',
             'jurusan' => 'required',
             'jk' => 'required',
             'email' => 'required|email|unique:siswas,email,' . $id,
@@ -76,11 +83,13 @@ class SiswaController extends Controller
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
-        // replace foto
+        $infoKelas = \App\Models\Kelas::find($request->kelas_id);
+        $validated['kelas'] = $infoKelas->nama_kelas;
+
         if ($request->hasFile('foto')) {
-            $path = public_path('uploads/siswa/' . $siswa->foto);
-            if (File::exists($path)) {
-                File::delete($path);
+            $pathLama = public_path('uploads/siswa/' . $siswa->foto);
+            if (File::exists($pathLama) && $siswa->foto) {
+                File::delete($pathLama);
             }
 
             $file = $request->file('foto');
@@ -98,9 +107,8 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::findOrFail($id);
 
-        // hapus foto
         $path = public_path('uploads/siswa/' . $siswa->foto);
-        if (File::exists($path)) {
+        if (File::exists($path) && $siswa->foto) {
             File::delete($path);
         }
 

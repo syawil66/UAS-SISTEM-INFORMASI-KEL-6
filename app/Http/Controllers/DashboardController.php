@@ -85,4 +85,17 @@ class DashboardController extends Controller
 
         return view('dashboard', compact('dataAdmin', 'dataGuru'));
     }
+    public function jadwal()
+{
+    $guru = Auth::user()->guru;
+
+    $jadwal = $guru->jadwal()
+        ->with(['mapel', 'kelas'])
+        ->orderByRaw("FIELD(hari,'Senin','Selasa','Rabu','Kamis','Jumat','Sabtu')")
+        ->orderBy('jam_mulai')
+        ->get();
+
+    return view('guru.jadwal.index', compact('jadwal'));
+}
+
 }

@@ -41,7 +41,7 @@
                             <td>{{ $item->jurusan }}</td>
                             <td>{{ $item->jumlah_siswa }}</td>
                             <td class="text-center">
-                                <a href="{{ route('kelas.edit', $item->id) }}" class="btn btn-success btn-sm">
+                                <a href="{{ route('akademik.kelas.edit', $item->id) }}" class="btn btn-success btn-sm">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
                                 <form action="{{ route('akademik.kelas.destroy', $item->id) }}" method="POST" class="d-inline">

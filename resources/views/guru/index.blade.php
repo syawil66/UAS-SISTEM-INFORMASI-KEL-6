@@ -103,6 +103,8 @@
                         <td colspan="7" class="text-center">Data guru masih kosong.</td>
                     </tr>
                     @endforelse
+
+                    
                 </tbody>
             </table>
         </div>

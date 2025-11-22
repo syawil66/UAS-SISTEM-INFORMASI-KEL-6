@@ -16,5 +16,12 @@ class Kelas extends Model
         'nama_kelas',
         'jurusan',
         'jumlah_siswa',
+ 
     ];
+    
+    public function jadwal()
+{
+    return $this->hasMany(JadwalPelajaran::class);
+}
+
 }

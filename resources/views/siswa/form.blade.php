@@ -28,8 +28,16 @@
         </div>
 
         <div class="form-group mb-2">
-            <label>Kelas</label>
-            <input type="text" name="kelas" value="{{ old('kelas', $siswa->kelas ?? '') }}" class="form-control">
+            <label>Kelas <span class="text-danger">*</span></label>
+            <select name="kelas_id" class="form-control" required>
+                <option value="">-- Pilih Kelas --</option>
+                @foreach($dataKelas as $itemKelas)
+                    <option value="{{ $itemKelas->id }}"
+                        {{ old('kelas_id', $siswa->kelas_id ?? '') == $itemKelas->id ? 'selected' : '' }}>
+                        {{ $itemKelas->nama_kelas }}
+                    </option>
+                @endforeach
+            </select>
         </div>
 
         <div class="form-group mb-2">

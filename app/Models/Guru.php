@@ -34,4 +34,15 @@ public function user()
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function nilai()
+{
+    return $this->hasMany(Nilai::class, 'guru_id');
+}
+
+public function jadwal()
+{
+    return $this->hasMany(JadwalPelajaran::class);
+}
+
+
 }

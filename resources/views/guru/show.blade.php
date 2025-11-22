@@ -2,7 +2,7 @@
 
 @section('title', 'Detail Guru - SIAKAD SMA')
 @section('page-title')
-    Detail Data Guru: {{ $guru->user->name }}
+    Detail Data Guru: {{ $guru->user->name ?? 'Data User Hilang' }}
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
                     <tbody>
                         <tr>
                             <td style="width: 30%;"><strong>Nama Lengkap</strong></td>
-                            <td>{{ $guru->user->name }}</td>
+                            <td>{{ $guru->user?->name ?? 'Data User Hilang' }}</td>
                         </tr>
                         <tr>
                             <td><strong>NIP</strong></td>
@@ -37,7 +37,7 @@
                         </tr>
                         <tr>
                             <td><strong>Email</strong></td>
-                            <td>{{ $guru->user->email }}</td>
+                            <td>{{ $guru->user?->email ?? '-' }}</td>
                         </tr>
                         <tr>
                             <td><strong>No. Handphone</strong></td>
@@ -58,38 +58,12 @@
                         <tr>
                             <td><strong>Status Aktif</strong></td>
                             <td>
-                                @if($guru->user->status_aktif == 'Aktif')
-                                    <span class="badge badge-success">{{ $guru->user->status_aktif }}</span>
+                                @if(optional($guru->user)->status_aktif == 'Aktif')
+                                    <span class="badge badge-success">Aktif</span>
                                 @else
-                                    <span class="badge badge-danger">{{ $guru->user->status_aktif }}</span>
+                                    <span class="badge badge-danger">{{ $guru->user?->status_aktif ?? 'Tidak Diketahui' }}</span>
                                 @endif
                             </td>
-                        </tr>
-                        <tr>
-                            <td><strong>Wali Kelas?</strong></td>
-                            <td>
-                                @if($guru->is_wali_kelas)
-                                    <span class="badge badge-success">Ya</span>
-                                @else
-                                    <span class="badge badge-secondary">Bukan</span>
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>Alamat Lengkap</strong></td>
-                            <td>{{ $guru->alamat_lengkap ?? '-' }}</td>
-                        </tr>
-
-                        <tr class="table-warning">
-                            <td colspan="2"><strong>Informasi Sensitif</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>NPWP</strong></td>
-                            <td>{{ $guru->npwp ?? '-' }}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>No. Rekening</strong></td>
-                            <td>{{ $guru->no_rekening ?? '-' }}</td>
                         </tr>
                     </tbody>
                 </table>

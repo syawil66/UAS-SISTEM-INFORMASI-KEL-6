@@ -66,13 +66,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Guru Pengampu <span class="text-danger">*</span></label>
+                        <label>Guru Pengampu</label>
                         <select name="guru_id" class="form-control" required>
                             <option value="">-- Pilih Guru --</option>
-                            @foreach($gurus as $guru)
-                                <option value="{{ $guru->id }}" {{ old('guru_id', $mataPelajaran->guru_id) == $guru->id ? 'selected' : '' }}>
-                                    {{ $guru->nama_guru }}
-                                </option>
+                                @foreach($gurus as $guru)
+                            <option value="{{ $guru->id }}"
+                                {{ (isset($mataPelajaran) && $mataPelajaran->guru_id == $guru->id) ? 'selected' : '' }}>
+                                {{ $guru->user->name ?? 'Nama Error' }} - {{ $guru->bidang_ajar }}
+                            </option>
                             @endforeach
                         </select>
                     </div>

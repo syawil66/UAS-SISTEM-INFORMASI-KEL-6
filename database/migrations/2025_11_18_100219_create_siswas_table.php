@@ -19,7 +19,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('no_hp');
             $table->enum('status', ['Aktif','Tidak Aktif'])->default('Aktif');
-            $table->string('foto')->nullable(); // FOTO
+            $table->string('foto')->nullable();
+
+            $table->unsignedBigInteger('kelas_id')->nullable();
+
             $table->timestamps();
         });
     }
@@ -28,4 +31,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('siswas');
     }
+
+
+
 };

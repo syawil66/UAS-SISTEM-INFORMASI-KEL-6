@@ -22,4 +22,10 @@ class MataPelajaran extends Model
     {
         return $this->belongsTo(Guru::class, 'guru_id');
     }
+    
+    public function jadwal()
+{
+    return $this->hasMany(JadwalPelajaran::class);
+}
+
 }
